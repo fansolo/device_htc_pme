@@ -231,6 +231,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.max.fling_velocity=20000 \
     ro.adb.secure=0
 
-# OTA
-PRODUCT_PROPERTY_OVERRIDES += \
-    lineage.updater.uri=https://raw.githubusercontent.com/Fagyi/OTA/lineage-17.0/pme.json
+
