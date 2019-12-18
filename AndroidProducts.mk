@@ -14,7 +14,7 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_pme.mk
+    $(LOCAL_DIR)/bliss_pme.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_pme-userdebug
+    bliss_pme-userdebug
