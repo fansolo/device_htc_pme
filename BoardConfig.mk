@@ -92,7 +92,7 @@ AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 #AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
 AUDIO_FEATURE_ENABLED_PERF_HINTS := true
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
-BOARD_SUPPORTS_SOUND_TRIGGER := false
+BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
 #USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
@@ -239,9 +239,10 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_ppe.so \
     /system/lib64/lib-imsvideocodec.so|/system/vendor/lib64/libshim_ims.so
 
-# Selinux
+# SELinux
 BOARD_SEPOLICY_DIRS += \
 	device/htc/pme/sepolicy-tmp
+
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \

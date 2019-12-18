@@ -14,7 +14,7 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/bliss_pme.mk
+    $(LOCAL_DIR)/havoc_pme.mk
 
 COMMON_LUNCH_CHOICES := \
-    bliss_pme-userdebug
+    havoc_pme-userdebug
