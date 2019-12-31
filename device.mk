@@ -29,6 +29,8 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
+
+
 # Device was launched with M
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=23
