@@ -14,7 +14,7 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/colt_pme.mk
+    $(LOCAL_DIR)/havoc_pme.mk
 
 COMMON_LUNCH_CHOICES := \
-    colt_pme-userdebug
+    havoc_pme-userdebug
