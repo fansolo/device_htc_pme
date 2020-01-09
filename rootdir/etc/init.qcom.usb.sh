@@ -109,11 +109,7 @@ if [ "$(getprop persist.vendor.usb.config)" == "" -a \
 	              "sdm845" | "sdm710")
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
 		      ;;
-<<<<<<< HEAD
-	              "msmnile" | "sm6150" | "trinket")
-=======
-	              "msmnile" | "sm6150" | "trinket" | "lito" | "atoll" | "bengal")
->>>>>>> f042227b... op3: Update boot scripts from LA.UM.8.6.r1-02900-89xx.0
+	               "msmnile" | "sm6150" | "trinket" | "lito" | "atoll" | "bengal")
 			  setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
 		      ;;
 	              *)
