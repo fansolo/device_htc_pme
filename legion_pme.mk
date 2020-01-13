@@ -21,12 +21,15 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 
-# Inherit some common Havoc stuff.
-$(call inherit-product, vendor/havoc/config/common_full_phone.mk)
+## Inherit some common CM stuff.
+$(call inherit-product, vendor/legion/config/common.mk)
+TARGET_GAPPS_ARCH := arm64
+# Boot animation
+TARGET_BOOT_ANIMATION_RES := 1080
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := pme
-PRODUCT_NAME := havoc_pme
+PRODUCT_NAME := legion_pme
 PRODUCT_BRAND := HTC
 PRODUCT_MODEL := HTC 10
 PRODUCT_MANUFACTURER := HTC
@@ -36,3 +39,4 @@ $(call inherit-product-if-exists, vendor/htc/pme/pme-vendor.mk)
 
 # Device Fingerprint
 BUILD_FINGERPRINT := htc/pmeuhl_00401/htc_pmeuhl:8.0.0/OPR1.170623.027/1012001.2:user/release-keys
+
