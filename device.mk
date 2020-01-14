@@ -175,9 +175,10 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     services-ext
 
-# Device Settings
+# GestureHandler
 PRODUCT_PACKAGES += \
-    DeviceSettings
+    GestureHandler
+
 
 # Display
 PRODUCT_PACKAGES += \
