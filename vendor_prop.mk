@@ -74,9 +74,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.cne.feature=1 \
     persist.vendor.dpm.feature=0 \
 
-# Enable STM events
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.coresight.config=stm-events
+
 
 # Data modules
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -84,6 +82,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
     persist.vendor.data.mode=concurrent
+    persist.radio.aosp_usr_pref_sel=true \
+    persist.vendor.data.mode=concurrent \
+    persist.data.mode=concurrent
 
 # Default pd_enable value
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -92,6 +93,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
+
+# Enable STM events
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.coresight.config=stm-events
 
 # Fast charge
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -124,6 +129,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.data.iwlan.enable=true \
+    persist.vendor.radio.rat_on=combine \
+    persist.radio.calls.on.ims=1 \
     persist.dbg.ims_volte_enable=1 \
     persist.dbg.wfc_avail_ovr=1 \
     service.qti.ims.enabled=1 \
@@ -180,7 +187,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ims.dropset_feature=0 \
     persist.data.profile_update=true \
     persist.radio.NETWORK_SWITCH=1 \
-    persist.sys.fflag.override.settings_network_and_internet_v2=true
+    persist.sys.fflag.override.settings_network_and_internet_v2=true\
+    telephony.lteOnCdmaDevice=1
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -222,7 +230,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.delta_time.enable=true
+    persist.timed.enable=true \
+    persist.delta_time.enable=true
 
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
