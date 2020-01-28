@@ -1,5 +1,4 @@
-soong_namespace {
-}
+
 
 cc_library_shared {
     srcs: ["ril_shim.cpp"],
