@@ -201,6 +201,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.sta_detect=false \
     ro.qti.sensors.mot_detect=false
 
+# Surfaceflinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
+
 # SSC/SLPI sensor daemon
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.ssc=true
@@ -227,5 +232,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.min.fling_velocity=160 \
     ro.max.fling_velocity=20000 \
-    ro.adb.secure=0
-
+    persist.sys.disable_rescue=true
