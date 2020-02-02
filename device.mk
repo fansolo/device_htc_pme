@@ -22,8 +22,9 @@ $(call inherit-product-if-exists, vendor/htc/pme/pme-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay 
-    
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-Bliss
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
@@ -207,8 +208,8 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 # Doze
-#PRODUCT_PACKAGES += \
-#    HTCDoze
+PRODUCT_PACKAGES += \
+    HTCDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -229,8 +230,8 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service
 
 # FlipFlap
-#PRODUCT_PACKAGES += \
-#    FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
 
 # fwk-detect
 PRODUCT_PACKAGES += \

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The CyanogenMod Project
+<!--
+     Copyright (C) 2015 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,13 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources>
-
-    <!-- Defines the custom proximity sensor used by various OEMs like OnePlus-->
-    <string name="config_custom_tilt">com.htc.sensor.pickup</string>
-
-    <!-- Defines the custom pocket sensor used by various OEMs like OnePlus-->
-    <string name="config_custom_proximity">com.htc.sensor.pocket</string>
-    
+    <!-- ActionBar contentInsetStart -->
+    <dimen name="actionbar_subsettings_contentInsetStart">72dp</dimen>
 </resources>
