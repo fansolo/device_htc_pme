@@ -74,7 +74,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.cne.feature=1 \
     persist.vendor.dpm.feature=0 \
 
-
+# Enable STM events
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.coresight.config=stm-events
 
 # Data modules
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -82,9 +84,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
     persist.vendor.data.mode=concurrent
-    persist.radio.aosp_usr_pref_sel=true \
-    persist.vendor.data.mode=concurrent \
-    persist.data.mode=concurrent
 
 # Default pd_enable value
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -93,10 +92,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
-
-# Enable STM events
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.coresight.config=stm-events
 
 # Fast charge
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -112,6 +107,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.sf.hw=1 \
     debug.sf.latch_unsignaled=1 \
+    debug.gralloc.gfx_ubwc_disable=0 \
     debug.sf.enable_hwc_vds=1 \
     dev.pm.dyn_samplingrate=1 \
     persist.demo.hdmirotationlock=false \
@@ -122,6 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_rotator_downscale=1 \
     ro.sf.lcd_density=520 \
     vendor.display.perf_hint_window=50 \
+    vendor.gralloc.enable_fb_ubwc=1 \
     vendor.display.disable_skip_validate=1
 
 # IMS
@@ -129,8 +126,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.data.iwlan.enable=true \
-    persist.vendor.radio.rat_on=combine \
-    persist.radio.calls.on.ims=1 \
     persist.dbg.ims_volte_enable=1 \
     persist.dbg.wfc_avail_ovr=1 \
     service.qti.ims.enabled=1 \
@@ -168,7 +163,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -187,8 +183,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.ims.dropset_feature=0 \
     persist.data.profile_update=true \
     persist.radio.NETWORK_SWITCH=1 \
-    persist.sys.fflag.override.settings_network_and_internet_v2=true\
-    telephony.lteOnCdmaDevice=1
+    persist.sys.fflag.override.settings_network_and_internet_v2=true
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -209,14 +204,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.sta_detect=false \
     ro.qti.sensors.mot_detect=false
 
-# Surfaceflinger
+# SurfaceFlinger
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.early_phase_offset_ns=1500000 \
-    debug.sf.early_app_phase_offset_ns=1500000 \
+    debug.sf.enable_gl_backpressure=1 \
+    debug.sf.enable_hwc_vds=1 \
+    debug.sf.early_phase_offset_ns=500000 \
+    debug.sf.early_app_phase_offset_ns=500000 \
     debug.sf.early_gl_phase_offset_ns=3000000 \
-    debug.sf.early_gl_app_phase_offset_ns=15000000
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    debug.sf.early_gl_app_phase_offset_ns=15000000 \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
@@ -230,8 +226,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.timed.enable=true \
-    persist.delta_time.enable=true
+    persist.vendor.delta_time.enable=true
 
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -247,4 +242,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.min.fling_velocity=160 \
     ro.max.fling_velocity=20000 \
-    persist.sys.disable_rescue=true
+    ro.adb.secure=0
+
