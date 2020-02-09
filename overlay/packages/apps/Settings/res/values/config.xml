@@ -23,3 +23,6 @@
   -->
   <integer name="config_fingerprintSensorLocation">1</integer>
 </resources>
+<resources>
+	<string name="maintainer_name">Samuel Montero</string>
+</resources>

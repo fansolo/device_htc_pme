@@ -190,7 +190,7 @@ HWUI_COMPILE_FOR_PERF := true
 
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := libinit_pme
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_pme
 TARGET_RECOVERY_DEVICE_MODULES := libinit_pme
 
 # Keymaster
@@ -213,7 +213,8 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 26323451904
 TARGET_USES_MKE2FS := true
 
 # Power
-TARGET_USES_NON_LEGACY_POWERHAL := true
+TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
+# TARGET_USES_NON_LEGACY_POWERHAL := true
 TARGET_USES_INTERACTION_BOOST := true
 
 # Qualcomm
@@ -242,10 +243,12 @@ TARGET_LD_SHIM_LIBS := \
 BOARD_SEPOLICY_DIRS += \
 	device/htc/pme/sepolicy-tmp
 
+#NeverAllows
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    device/htc/pme/libshims
+    device/htc/pme
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
