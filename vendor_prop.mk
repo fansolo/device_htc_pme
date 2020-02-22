@@ -206,6 +206,32 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.sta_detect=false \
     ro.qti.sensors.mot_detect=false
 
+
+
+# Set lmkd options
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.lmk.low=1001 \
+    ro.lmk.medium=800 \
+    ro.lmk.critical=0 \
+    ro.lmk.critical_upgrade=false \
+    ro.lmk.upgrade_pressure=100 \
+    ro.lmk.downgrade_pressure=100 \
+    ro.lmk.kill_heaviest_task=true \
+    ro.lmk.kill_timeout_ms=100 \
+    ro.lmk.use_minfree_levels=true
+
+# Surfaceflinger
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.early_phase_offset_ns=1500000 \
+    debug.sf.early_app_phase_offset_ns=1500000 \
+    debug.sf.early_gl_phase_offset_ns=3000000 \
+    debug.sf.early_gl_app_phase_offset_ns=15000000
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
+
+>>>>>>> 6552ea0a... pme: Add lmkd props
 # SSC/SLPI sensor daemon
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.ssc=true
