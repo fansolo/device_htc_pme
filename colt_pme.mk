@@ -34,7 +34,7 @@ PRODUCT_BRAND := HTC
 PRODUCT_MODEL := HTC 10
 PRODUCT_MANUFACTURER := HTC
 PRODUCT_RELEASE_NAME := pme
-
+$(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)
 $(call inherit-product-if-exists, vendor/htc/pme/pme-vendor.mk)
 
 # Device Fingerprint
