@@ -28,6 +28,10 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    device/htc/pme \
+    vendor/nxp/opensource/pn5xx
 
 
 # Device was launched with M
@@ -338,7 +342,7 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.pme
 
 # LiveDisplay native
-PRODUCT_PACKAGES += \
+#  PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@1.0-service-sdm
 
 # Marlin IRQ Balancer configuration file
