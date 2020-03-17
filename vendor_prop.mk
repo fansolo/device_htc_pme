@@ -232,7 +232,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
->>>>>>> 6552ea0a... pme: Add lmkd props
+
 # SSC/SLPI sensor daemon
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.ssc=true
