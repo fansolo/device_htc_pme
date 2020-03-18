@@ -14,7 +14,7 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/bliss_pme.mk
+    $(LOCAL_DIR)/cesium_pme.mk
 
 COMMON_LUNCH_CHOICES := \
-    bliss_pme-userdebug
+    cesium_pme-userdebug
