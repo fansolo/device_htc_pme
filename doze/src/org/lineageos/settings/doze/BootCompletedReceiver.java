@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2017 The LineageOS Project
+ * Copyright (C) 2015 The CyanogenMod Project
+ *               2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,13 @@ import android.content.Intent;
 import android.util.Log;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
-    static final String TAG = "HTCDoze";
+
+    private static final boolean DEBUG = false;
+    private static final String TAG = "OnePlusDoze-BootCompletedReceiver";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        Log.d(TAG, "Booting");
-        context.startService(new Intent(context, SensorsDozeService.class));
+        if (DEBUG) Log.d(TAG, "Received boot completed intent");
+        Utils.checkDozeService(context);
     }
 }

@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2015-2016 The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2015 The CyanogenMod Project
+ *               2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 
 package org.lineageos.settings.doze;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,103 +25,117 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 
-public class DozeSettingsFragment extends PreferenceFragment implements
-        CompoundButton.OnCheckedChangeListener {
+public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    private static final String KEY_GESTURE_HAND_WAVE = "gesture_hand_wave";
-    private static final String KEY_GESTURE_PICK_UP = "gesture_pick_up";
-    private static final String KEY_GESTURE_POCKET = "gesture_pocket";
+    private TextView mTextView;
+    private View mSwitchBar;
 
-    private Switch mSwitch;
     private SwitchPreference mHandwavePreference;
-    private SwitchPreference mPickupPreference;
+    private SwitchPreference mPickUpPreference;
     private SwitchPreference mPocketPreference;
-    private TextView mSwitchBarText;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.doze_settings);
+        final ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("doze_settings",
-                Activity.MODE_PRIVATE);
-        if (savedInstanceState == null && !prefs.getBoolean("first_help_shown", false)) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("doze_settings", Activity.MODE_PRIVATE);
+        if (savedInstanceState == null && !sharedPreferences.getBoolean("first_help_shown", false)) {
             showHelp();
         }
 
-        boolean dozeEnabled = isDozeEnabled();
+        boolean dozeEnabled = Utils.isDozeEnabled(getActivity());
 
-        mHandwavePreference = (SwitchPreference) findPreference(KEY_GESTURE_HAND_WAVE);
+        mHandwavePreference = (SwitchPreference) findPreference(Utils.GESTURE_HAND_WAVE_KEY);
         mHandwavePreference.setEnabled(dozeEnabled);
-        mPickupPreference = (SwitchPreference) findPreference(KEY_GESTURE_PICK_UP);
-        mPickupPreference.setEnabled(dozeEnabled);
-        mPocketPreference = (SwitchPreference) findPreference(KEY_GESTURE_POCKET);
+        mHandwavePreference.setOnPreferenceChangeListener(this);
+
+        mPickUpPreference = (SwitchPreference) findPreference(Utils.GESTURE_PICK_UP_KEY);
+        mPickUpPreference.setEnabled(dozeEnabled);
+        mPickUpPreference.setOnPreferenceChangeListener(this);
+
+        mPocketPreference = (SwitchPreference) findPreference(Utils.GESTURE_POCKET_KEY);
         mPocketPreference.setEnabled(dozeEnabled);
+        mPocketPreference.setOnPreferenceChangeListener(this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getContext()).inflate(R.layout.doze, container, false);
-        ((ViewGroup) view).addView(super.onCreateView(inflater, container, savedInstanceState));
-               return view;
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstanceState) {
+        final View view = LayoutInflater.from(getContext()).inflate(R.layout.doze, viewGroup, false);
+        ((ViewGroup) view).addView(super.onCreateView(layoutInflater, viewGroup, savedInstanceState));
+
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View switchBar = view.findViewById(R.id.switch_bar);
-        mSwitch = (Switch) switchBar.findViewById(android.R.id.switch_widget);
-        mSwitch.setChecked(isDozeEnabled());
-        mSwitch.setOnCheckedChangeListener(this);
+        boolean dozeEnabled = Utils.isDozeEnabled(getActivity());
 
+        mTextView = view.findViewById(R.id.switch_text);
+        mTextView.setText(getString(dozeEnabled ? R.string.switch_bar_on : R.string.switch_bar_off));
 
-        boolean dozeEnabled = isDozeEnabled();
-        mSwitchBarText = (TextView) view.findViewById(R.id.switch_text);
-        mSwitchBarText.setText(getString(dozeEnabled ? R.string.switch_bar_on : R.string.switch_bar_off));
+        mSwitchBar = view.findViewById(R.id.switch_bar);
+        mSwitchBar.setActivated(dozeEnabled);
 
-        switchBar.setOnClickListener(new View.OnClickListener() {
+        Switch switchWidget = (Switch) mSwitchBar.findViewById(android.R.id.switch_widget);
+        switchWidget.setChecked(dozeEnabled);
+        switchWidget.setOnCheckedChangeListener(this);
+
+        mSwitchBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSwitch.setChecked(!mSwitch.isChecked());
+                switchWidget.setChecked(!switchWidget.isChecked());
+                mSwitchBar.setActivated(switchWidget.isChecked());
             }
         });
     }
 
-    private boolean enableDoze(boolean enable) {
-        return Settings.Secure.putInt(getContext().getContentResolver(),
-                Settings.Secure.DOZE_ENABLED, enable ? 1 : 0);
-    }
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Utils.enableGesture(getActivity(), preference.getKey(), (Boolean) newValue);
+        Utils.checkDozeService(getActivity());
 
-    private boolean isDozeEnabled() {
-        return Settings.Secure.getInt(getContext().getContentResolver(),
-                Settings.Secure.DOZE_ENABLED, 1) != 0;
+        return true;
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        boolean ret = enableDoze(b);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        Utils.enableDoze(getActivity(), isChecked);
+        Utils.checkDozeService(getActivity());
 
-        mSwitchBarText.setText(getString(b ? R.string.switch_bar_on : R.string.switch_bar_off));
+        mTextView.setText(getString(isChecked ? R.string.switch_bar_on : R.string.switch_bar_off));
+        mSwitchBar.setActivated(isChecked);
 
-        if (ret) {
-            mHandwavePreference.setEnabled(b);
-            mPickupPreference.setEnabled(b);
-            mPocketPreference.setEnabled(b);
+        mHandwavePreference.setEnabled(isChecked);
+        mPickUpPreference.setEnabled(isChecked);
+        mPocketPreference.setEnabled(isChecked);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+
+            return true;
         }
+
+        return false;
     }
 
     public static class HelpDialogFragment extends DialogFragment {
@@ -131,8 +146,8 @@ public class DozeSettingsFragment extends PreferenceFragment implements
                     .setMessage(R.string.doze_settings_help_text)
                     .setNegativeButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
+                        public void onClick(DialogInterface dialogInterface, int which) {
+                            dialogInterface.cancel();
                         }
                     })
                     .create();
@@ -148,7 +163,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements
     }
 
     private void showHelp() {
-        HelpDialogFragment fragment = new HelpDialogFragment();
-        fragment.show(getFragmentManager(), "help_dialog");
+        HelpDialogFragment helpDialogFragment = new HelpDialogFragment();
+        helpDialogFragment.show(getFragmentManager(), "help_dialog");
     }
 }

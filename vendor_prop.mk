@@ -237,6 +237,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.ssc=true
 
+# System prop to turn on CdmaLTEPhone always
+telephony.lteOnCdmaDevice=1
+
 # System prop for enabling/disabling Android XLAT
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.net.doxlat=false
