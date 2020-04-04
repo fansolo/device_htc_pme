@@ -246,9 +246,8 @@ BOARD_SEPOLICY_DIRS += \
 #NeverAllows
 SELINUX_IGNORE_NEVERALLOWS := true
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    device/htc/pme
+
+
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
