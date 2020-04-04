@@ -205,7 +205,7 @@ PRODUCT_PACKAGES += \
     android.hardware.configstore@1.0-service \
     vendor.display.color@1.0-service \
     vendor.display.color@1.0-impl \
-    vendor.display.config@1.1 \
+    vendor.display.config@1.11 \
     vendor.display.config@1.1_vendor \
     copybit.msm8996 \
     gralloc.msm8996 \
