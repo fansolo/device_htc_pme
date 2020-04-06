@@ -29,7 +29,10 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
-
+# Namespace
+PRODUCT_BOARD_PLATFORM := msm8996
+PRODUCT_USES_QCOM_HARDWARE := true
+PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
 
 # Device was launched with M
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -334,11 +337,10 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.pme
+     android.hardware.light@2.0-impl \
+     android.hardware.light@2.0-service
 
-# LiveDisplay native
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-sdm
+
 
 # Marlin IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \

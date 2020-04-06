@@ -243,9 +243,6 @@ BOARD_SEPOLICY_DIRS += \
 	device/htc/pme/sepolicy-tmp
 
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    device/htc/pme
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
