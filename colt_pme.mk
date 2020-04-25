@@ -27,6 +27,10 @@ $(call inherit-product, vendor/colt/config/common.mk)
 # Bootanimation
 TARGET_BOOT_ANIMATION_RES := 1080x1920
 
+# Mainatiner Prop
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.colt.maintainer="Fansolo"
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := pme
 PRODUCT_NAME := colt_pme
